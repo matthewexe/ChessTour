@@ -1,0 +1,254 @@
+:root {
+  --main-bg: #f8f4e1;
+  --main-border-color: #897853;
+  --header-bg: #4e3620;
+  --header--text-color: #c8eed9;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background: url("./images/chess-marble-floor-260nw-343623008.svg") no-repeat
+    fixed center;
+  background-size: cover;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--header-bg); /* #51709e */
+  color: #efefef;
+  font-size: 40pt;
+}
+
+header .logo .reverse {
+  transform: scale(-1, 1);
+}
+
+main {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 80%;
+  min-height: calc(100vh - 82px);
+  background-color: var(--main-bg);
+  margin: auto;
+  padding: 25px;
+}
+
+.container .add-player {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 20px 0;
+}
+
+.container .add-player form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: inherit;
+}
+
+.container .add-player .err {
+  text-align: center;
+  padding: 5px 0;
+  color: rgb(233, 0, 0);
+  transition: all 0.2s;
+}
+
+.container .add-player form .input-data {
+  margin: 10px 0;
+  max-width: 300px;
+}
+
+.container .add-player form .input-data span {
+  position: relative;
+  top: calc(11pt + 10px);
+  left: 10px;
+  font-size: 11pt;
+  color: rgb(163, 163, 163);
+  pointer-events: none;
+  transition: 0.2s;
+  user-select: none;
+}
+
+.container .add-player form .input-data input {
+  padding: 10px;
+  border: none;
+  border-left: 3px solid var(--main-border-color);
+  border-bottom: 3px solid var(--main-border-color);
+  background-color: #fffef7;
+  width: 300px;
+  outline: none;
+  transition: all 0.5s;
+}
+
+.container .add-player form input#add-to-list {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 2px;
+  background-color: var(--header-bg);
+  color: var(--header--text-color);
+  cursor: pointer;
+  outline: none;
+}
+
+.container .add-player form .input-data .active {
+  top: 0;
+  left: 0;
+  color: var(--main-border-color);
+}
+
+.container .add-player .button-start button#start {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 2px;
+  background-color: var(--header-bg);
+  color: var(--header--text-color);
+  font-size: 15pt;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+
+/* .container .add-player .button-start button#start a {
+  text-decoration: none;
+  color: inherit;
+  font-size: larger;
+  font-weight: 700;
+} */
+
+.container .data-player {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+
+.container .data-player table {
+  font-weight: 500;
+  font-size: larger;
+  width: 100%;
+  text-align: center;
+}
+
+.container .data-player table tbody tr {
+  width: 100%;
+}
+
+.container .data-player table tbody td {
+  padding: 5px;
+}
+
+.container .data-player table tbody tr i.fa-trash {
+  font-size: smaller;
+  color: rgb(187, 187, 187);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.container .data-player table tbody tr i.fa-trash:hover {
+  color: brown;
+}
+
+.container .data-player table tr#head {
+  font-weight: 800;
+}
+/*   border-collapse: collapse;
+  border: 1px solid var(--main-border-color); */
+
+.container .data-player table,
+.container .data-player table tr {
+  border-collapse: collapse;
+  border-bottom: 2px solid var(--main-border-color);
+}
+
+/* Games */
+/* Games */
+/* Games */
+
+.container h4 {
+  text-align: center;
+  max-width: 200px;
+  font-weight: 400;
+}
+
+.container .games {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 90%;
+  min-width: 300px;
+  padding: 10px 0;
+  margin: 10px 0;
+}
+
+.container .games .game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 225px;
+  margin: 5px;
+}
+
+.container .games .game .players {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}
+
+.container .games .game .players .player {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+.container .games .game .players .player .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 0 10px 0;
+  box-shadow: 0px 0px 62px 2px rgba(136, 136, 136, 0.377);
+}
+
+.container .games .game .players .player:nth-child(2) .info {
+  background-color: #111111;
+  color: #fffef7;
+}
+
+.container .games .game .players .player button {
+  background-color: var(--main-border-color);
+  color: white;
+  padding: 5px;
+  outline: none;
+}
