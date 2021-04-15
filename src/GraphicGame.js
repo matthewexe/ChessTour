@@ -24,11 +24,28 @@ class GraphicGame {
             "</span></div><button>Winner</button></div></div></div>";
     }
 
-    onScreen(lower, greater) {
-        for (const key in lower) {
-            this.screenElement(lower[key], greater[key]);
+    onScreen(couples) {
+        for (const iterator of couples) {
+            this.screenElement(iterator[0], iterator[1]);
             // console.log(greater[key] + " " + lower[key]);
         }
+    }
+
+    getInfo(element) {
+        const info = new Array();
+        for (const span of element) {
+            info.push(span.outerText);
+        }
+        info[3] = parseInt(info[3]);
+        return info;
+    }
+
+    indexOfPlayer(tagPlayer) {
+        // Calling : this.indexOfPlayer(props.path[1])
+        return Array.prototype.indexOf.call(
+            tagPlayer.parentNode.children,
+            tagPlayer
+        );
     }
 }
 

@@ -12,12 +12,7 @@ class Player {
     }
 
     toArray() {
-        return new Array(
-            this.name,
-            this.surname,
-            this.nation.toLowerCase(),
-            this.elo
-        );
+        return new Array(this.name, this.surname, this.nation, this.elo);
     }
 }
 

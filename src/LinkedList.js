@@ -1,8 +1,8 @@
 import { Player } from "./Player.js";
 
 class LinkedList {
-    constructor(head = null) {
-        this.head = head;
+    constructor() {
+        this.head = null;
     }
 
     length(current = this.head) {
@@ -33,8 +33,8 @@ class LinkedList {
         }
     }
 
-    sortArrayByELo() {
-        return this.toArray().sort((a, b) => a[3] - b[3]);
+    sortArrayByELo(array) {
+        return array.sort((a, b) => a[3] - b[3]);
     }
 
     toArray(current = this.head) {
