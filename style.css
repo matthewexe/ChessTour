@@ -267,6 +267,10 @@ main {
   z-index: 10;
 }
 
+.end {
+  height: 100vh;
+}
+
 .winner h1 {
   background: repeating-linear-gradient(
     to right,
@@ -295,8 +299,19 @@ main {
   }
 }
 
-.end {
-  height: 100vh;
+.winner button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 2px;
+  font-size: 16px;
+  background-color: var(--header-bg);
+  outline: none;
+}
+
+.winner button a {
+  color: var(--main-bg);
+  text-decoration: none;
+  font-size: 22px;
 }
 
 /* Error field */
