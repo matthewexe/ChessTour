@@ -66,7 +66,10 @@ class GraphicGame {
 
     printWinner(winner) {
         const tag = document.querySelector(".winner");
-        tag.innerHTML = "<h1>" + winner + "</h1><p>has wooon!</p>";
+        tag.innerHTML =
+            '<div class="text"><h1>' +
+            winner +
+            '</h1><p>has wooon!</p></div><button><a href="./index.html">Play again</a></button>';
         tag.classList.add("end");
     }
 
