@@ -1,7 +1,7 @@
 import { LinkedList } from "./src/LinkedList.js";
 import { Table } from "./src/Table.js";
 
-const raw_input = document.querySelectorAll(
+const input_tags = document.querySelectorAll(
     "main .container .add-player form .input-data input[type = 'text']"
 );
 const add_btn = document.querySelector("#add-to-list");
@@ -9,49 +9,35 @@ const add_err = document.querySelector(".container .add-player .err");
 const table = new Table(".container .data-player table tbody");
 const list = new LinkedList();
 
-let input = new Array(raw_input.length);
+let input = new Array(input_tags.length);
 
-const setBorderColor = (element, color) => {
-    element.style.borderColor = color;
-};
+const emptyFields = () => input_tags.forEach((element) => (element.value = ""));
 
-const emptyFields = () => raw_input.forEach((element) => (element.value = ""));
-
-const deleteRow = (element) => {
+// Options for row with player and his delete button
+const removeRow = (element) => {
     element.parentNode.removeChild(element);
 };
 
-const removeRow = (props) => {
+const removePlayer = (props) => {
     list.remove(list.length() - props.path[2].rowIndex);
-    deleteRow(props.path[2]);
+    removeRow(props.path[2]);
 };
 
 const addPlayer = (input, table) => {
     table.addRow(input);
     const tableHTML = table.getTable();
     for (const iterator of tableHTML.children) {
-        iterator.lastChild.addEventListener("click", removeRow);
+        iterator.lastChild.addEventListener("click", removePlayer);
     }
-    tableHTML.children[0].removeEventListener("click", removeRow);
-    tableHTML.removeEventListener("click", removeRow);
+    tableHTML.children[0].removeEventListener("click", removePlayer);
+    tableHTML.removeEventListener("click", removePlayer);
     start_err.innerHTML = "";
 };
-
-add_btn.addEventListener("click", () => {
-    if (checkInput()) {
-        input = getInput();
-        list.add(input[0], input[1], input[2], input[3]);
-        addPlayer(input, table);
-        add_err.innerHTML = "";
-        emptyFields();
-        removeActive();
-    }
-});
 
 // Taking input fields
 const getInput = () => {
     const input = new Array();
-    raw_input.forEach((element, index) => {
+    input_tags.forEach((element, index) => {
         input.push(element.value.trim());
         if (index == 0 || index == 1) {
             input[index] =
@@ -118,11 +104,16 @@ const checkElo = (element) => {
 };
 
 const checkInput = () => {
-    const name = checkName(raw_input[0]);
-    const surname = checkSurname(raw_input[1]);
-    const nation = checkNation(raw_input[2]);
-    const elo = checkElo(raw_input[3]);
+    const name = checkName(input_tags[0]);
+    const surname = checkSurname(input_tags[1]);
+    const nation = checkNation(input_tags[2]);
+    const elo = checkElo(input_tags[3]);
     return name && surname && nation && elo;
+};
+
+// Set color of border input if there are or aren't errors
+const setBorderColor = (element, color) => {
+    element.style.borderColor = color;
 };
 
 const correctInput = (element) => {
@@ -134,8 +125,6 @@ const errorInput = (element) => {
     add_err.innerHTML = "<span>Fill all fields correctly</span>";
 };
 
-// Button "Start tournament"
-// Button "Start tournament"
 // Button "Start tournament"
 const start_btn = document.querySelector(
     ".container .add-player .button-start button#start"
@@ -151,8 +140,6 @@ start_btn.addEventListener("click", () => {
     else window.location.href = "./tournament.html";
 });
 
-// Animation Input
-// Animation Input
 // Animation Input
 
 const input_fields = document.querySelectorAll(
@@ -174,4 +161,14 @@ const removeActive = () =>
         element.children[0].classList.remove("active");
     });
 
-export { checkInput, getInput };
+// Button "Add player"
+add_btn.addEventListener("click", () => {
+    if (checkInput()) {
+        input = getInput();
+        list.add(input[0], input[1], input[2], input[3]);
+        addPlayer(input, table);
+        add_err.innerHTML = "";
+        emptyFields();
+        removeActive();
+    }
+});
