@@ -9,6 +9,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: inherit;
 }
 
 body {
@@ -103,12 +104,14 @@ main {
   transition: all 0.5s;
 }
 
-.container .add-player form input#add-to-list {
+.container .add-player form input#add-to-list,
+.container .btn-next button {
   padding: 10px 20px;
   border: none;
   border-radius: 2px;
+  font-size: 16px;
   background-color: var(--header-bg);
-  color: var(--header--text-color);
+  color: var(--main-bg);
   cursor: pointer;
   outline: none;
 }
@@ -124,19 +127,12 @@ main {
   border: none;
   border-radius: 2px;
   background-color: var(--header-bg);
-  color: var(--header--text-color);
+  color: var(--main-bg);
   font-size: 15pt;
   font-weight: 700;
   cursor: pointer;
   outline: none;
 }
-
-/* .container .add-player .button-start button#start a {
-  text-decoration: none;
-  color: inherit;
-  font-size: larger;
-  font-weight: 700;
-} */
 
 .container .data-player {
   display: flex;
@@ -236,6 +232,7 @@ main {
   align-items: center;
   background-color: #fff;
   border-radius: 10px;
+  width: 110px;
   padding: 20px;
   margin: 0 0 10px 0;
   box-shadow: 0px 0px 62px 2px rgba(136, 136, 136, 0.377);
@@ -251,4 +248,59 @@ main {
   color: white;
   padding: 5px;
   outline: none;
+}
+
+/* Winner tag */
+.winner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 0;
+  font-size: xx-large;
+  background-color: #ffffd9;
+  transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
+  z-index: 10;
+}
+
+.winner h1 {
+  background: repeating-linear-gradient(
+    to right,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 500% 500%;
+  animation: rainbow 8s infinite alternate;
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 0%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.end {
+  height: 100vh;
+}
+
+/* Error field */
+.err {
+  margin: 20px 0;
+  color: red;
 }

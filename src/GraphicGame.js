@@ -3,30 +3,36 @@ class GraphicGame {
         this.tag = document.querySelector(tag);
     }
 
-    screenElement(info1, info2) {
+    screenGame(info1, info2) {
         this.tag.innerHTML +=
-            '<div class="game"><h2>Game</h2><div class="players"><div class="player"><div class="info"><span>' +
-            info1[1] +
+            '<div class="game"><h2>Game</h2><div class="players">' +
+            this.screenPlayer(info1) +
+            this.screenPlayer(info2) +
+            "</div></div>";
+    }
+
+    screenPlayer(info) {
+        return (
+            '<div class="player">' +
+            '<div class="info">' +
+            "<span>" +
+            info[1] +
             "</span><span>" +
-            info1[0] +
+            info[0] +
             "</span><span>" +
-            info1[2] +
+            info[2] +
             "</span><span>" +
-            info1[3] +
-            '</span></div><button>Winner</button></div><div class="player"><div class="info"><span>' +
-            info2[1] +
-            "</span><span>" +
-            info2[0] +
-            "</span><span>" +
-            info2[2] +
-            "</span><span>" +
-            info2[3] +
-            "</span></div><button>Winner</button></div></div></div>";
+            info[3] +
+            "</span></div>" +
+            "<button>Winner" +
+            "</button></div>"
+        );
     }
 
     onScreen(couples) {
+        this.tag.innerHTML = "";
         for (const iterator of couples) {
-            this.screenElement(iterator[0], iterator[1]);
+            this.screenGame(iterator[0], iterator[1]);
             // console.log(greater[key] + " " + lower[key]);
         }
     }
@@ -46,6 +52,27 @@ class GraphicGame {
             tagPlayer.parentNode.children,
             tagPlayer
         );
+    }
+
+    getGameAll() {
+        const array = new Array();
+        for (const iterator of this.tag.children) {
+            console.log(iterator);
+            array.push(iterator.querySelectorAll("button"));
+        }
+
+        return array;
+    }
+
+    printWinner(winner) {
+        const tag = document.querySelector(".winner");
+        tag.innerHTML = "<h1>" + winner + "</h1><p>has wooon!</p>";
+        tag.classList.add("end");
+    }
+
+    printError(error) {
+        const field = document.querySelector(".container .err");
+        field.innerHTML = error;
     }
 }
 

@@ -33,7 +33,7 @@ class LinkedList {
         }
     }
 
-    sortArrayByELo(array) {
+    sortArrayByELo(array = this.toArray()) {
         return array.sort((a, b) => a[3] - b[3]);
     }
 
@@ -57,12 +57,15 @@ class LinkedList {
             );
         }
     }
+    setSession() {
+        sessionStorage.setItem(
+            "players",
+            JSON.stringify(this.sortArrayByELo())
+        );
+    }
 
-    getSessionStorage() {
-        sessionStorage.setItem("players", JSON.stringify(list.toArray()));
-        const list_tmp = JSON.parse(sessionStorage.players);
-
-        list.fromArray(list_tmp);
+    getSession() {
+        return JSON.parse(sessionStorage.players);
     }
 }
 

@@ -1,4 +1,4 @@
-import { LinkedList as List } from "./src/LinkedList.js";
+import { LinkedList } from "./src/LinkedList.js";
 import { Table } from "./src/Table.js";
 
 const raw_input = document.querySelectorAll(
@@ -7,7 +7,7 @@ const raw_input = document.querySelectorAll(
 const add_btn = document.querySelector("#add-to-list");
 const add_err = document.querySelector(".container .add-player .err");
 const table = new Table(".container .data-player table tbody");
-const list = new List();
+const list = new LinkedList();
 
 let input = new Array(raw_input.length);
 
@@ -145,6 +145,7 @@ const start_err = document.querySelector(
 );
 
 start_btn.addEventListener("click", () => {
+    list.setSession();
     if (list.length() < 2)
         start_err.innerHTML = "<span>Not enough players</span>";
     else window.location.href = "./tournament.html";

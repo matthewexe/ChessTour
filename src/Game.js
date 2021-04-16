@@ -1,4 +1,5 @@
 import { GraphicGame } from "./GraphicGame.js";
+import { LinkedList } from "./LinkedList.js";
 
 class Game extends GraphicGame {
     constructor(players, tag) {
@@ -34,38 +35,52 @@ class Game extends GraphicGame {
         return couples;
     }
 
-    Test(lower = this.lower, greater = this.greater) {
+    startGames(lower = this.lower, greater = this.greater) {
         const couples = this.matchRounds(lower, greater);
         this.onScreen(couples);
         const winners = new Array();
-        let cnt = 0; // contatore partite completate
+        const games = this.getGameAll();
+        const finish_btn = document.querySelector(
+            ".container .btn-next button"
+        );
 
-        const getButtons = () => {
-            const array = new Array();
-            for (const iterator of this.tag.children)
-                array.push(iterator.querySelectorAll("button"));
-
-            return array;
+        const isFinish = () => {
+            return winners.length == 1;
         };
 
-        const players_btn = getButtons();
+        const checkWinner = (winner) => {
+            const tmp = winners.map((value) => value.toString());
+            if (tmp.indexOf(winner.toString()) < 0) winners.push(winner);
+        };
 
         const addWinner = (props) => {
             const btn_winner = props.path[2].querySelectorAll("button");
-            winners.push(this.getInfo(props.path[1].firstChild.children));
-            cnt++;
-            console.log(winners);
+            checkWinner(this.getInfo(props.path[1].firstChild.children));
             for (const button of btn_winner) {
                 button.removeEventListener("click", addWinner);
             }
         };
 
-        for (const player of players_btn) {
+        // console.log(games);
+        for (const player of games) {
             for (const button of player) {
-                // console.log(button);
                 button.addEventListener("click", addWinner);
             }
         }
+
+        finish_btn.addEventListener("click", () => {
+            // console.log(isFinish(), winners.length, couples.length);
+            if (isFinish())
+                this.printWinner(winners[0][0] + " " + winners[0][1]);
+            else if (winners.length == couples.length) {
+                [lower, greater] = this.split(
+                    LinkedList.prototype.sortArrayByELo(winners)
+                );
+                this.startGames(lower, greater);
+            } else {
+                this.printError("Complete all game please");
+            }
+        });
     }
 }
 
