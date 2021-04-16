@@ -13,27 +13,6 @@ let input = new Array(input_tags.length);
 
 const emptyFields = () => input_tags.forEach((element) => (element.value = ""));
 
-// Options for row with player and his delete button
-const removeRow = (element) => {
-    element.parentNode.removeChild(element);
-};
-
-const removePlayer = (props) => {
-    list.remove(list.length() - props.path[2].rowIndex);
-    removeRow(props.path[2]);
-};
-
-const addPlayer = (input, table) => {
-    table.addRow(input);
-    const tableHTML = table.getTable();
-    for (const iterator of tableHTML.children) {
-        iterator.lastChild.addEventListener("click", removePlayer);
-    }
-    tableHTML.children[0].removeEventListener("click", removePlayer);
-    tableHTML.removeEventListener("click", removePlayer);
-    start_err.innerHTML = "";
-};
-
 // Taking input fields
 const getInput = () => {
     const input = new Array();
@@ -141,7 +120,6 @@ start_btn.addEventListener("click", () => {
 });
 
 // Animation Input
-
 const input_fields = document.querySelectorAll(
     ".container .add-player form .input-data"
 );
@@ -160,6 +138,27 @@ const removeActive = () =>
     input_fields.forEach((element) => {
         element.children[0].classList.remove("active");
     });
+
+// Options for row with player and his delete button
+const removeRow = (element) => {
+    element.parentNode.removeChild(element);
+};
+
+const removePlayer = (props) => {
+    list.remove(list.length() - props.path[2].rowIndex);
+    removeRow(props.path[2]);
+};
+
+const addPlayer = (input, table) => {
+    table.addRow(input);
+    const tableHTML = table.getTable();
+    for (const iterator of tableHTML.children) {
+        iterator.lastChild.addEventListener("click", removePlayer);
+    }
+    tableHTML.children[0].removeEventListener("click", removePlayer);
+    tableHTML.removeEventListener("click", removePlayer);
+    start_err.innerHTML = "";
+};
 
 // Button "Add player"
 add_btn.addEventListener("click", () => {
